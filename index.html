@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shabrina Namsikul Haq — Software Engineering Student</title>
+    <!-- Google Fonts for Futuristic Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-deep: #07090e;
+            --bg-card: rgba(18, 24, 38, 0.6);
+            --border-glow: rgba(0, 242, 254, 0.2);
+            --neon-cyan: #00f2fe;
+            --neon-purple: #7928ca;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Glow Orbs */
+        .ambient-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(121, 40, 202, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 40%;
+            right: -100px;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            background: rgba(7, 9, 14, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--neon-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Hero Section */
+        header.hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            position: relative;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--border-glow);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--neon-cyan), #7928ca);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 520px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-cyan), #0070f3);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(0, 242, 254, 0.05);
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .code-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .code-body pre {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #a5b4fc;
+            overflow-x: auto;
+        }
+
+        .code-body .tag { color: #f472b6; }
+        .code-body .prop { color: var(--neon-cyan); }
+        .code-body .string { color: #34d399; }
+
+        /* Main Sections */
+        section {
+            padding: 6rem 8%;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 2rem;
+            border-radius: 14px;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .skill-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(121, 40, 202, 0.4);
+            box-shadow: 0 15px 35px rgba(121, 40, 202, 0.15);
+        }
+
+        .project-img-placeholder {
+            height: 180px;
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            font-size: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-content {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag-pill {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 242, 254, 0.1);
+        }
+
+        .project-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-content p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            color: var(--neon-cyan);
+        }
+
+        /* About / Education */
+        .about-container {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 3rem;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1.5;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .edu-badge {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-glow);
+            padding: 2rem;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .edu-badge i {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .edu-badge h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .edu-badge span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: var(--neon-cyan);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            header.hero {
+                flex-direction: column;
+                padding-top: 8rem;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .about-container {
+                flex-direction: column;
+                padding: 2rem;
+            }
+            .nav-links {
+                display: none; /* simple mobile fallback */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Shabrina<span>.dev</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="about">
+        <div class="hero-content">
+            <div class="badge">
+                <i class="fa-solid fa-code"></i> Software Engineering Student
+            </div>
+            <h1>Hi, I'm <span>Shabrina</span> Namsikul Haq</h1>
+            <p>A passionate 1st-semester Software Engineering student at <strong>Politeknik Indonusa Surakarta</strong>, building high-quality, immersive, and sleek web experiences.</p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="code-card">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div class="code-body">
+                    <pre><code><span class="tag">&lt;profile&gt;</span>
+  <span class="prop">name:</span> <span class="string">"Shabrina Namsikul Haq"</span>
+  <span class="prop">major:</span> <span class="string">"Software Engineering"</span>
+  <span class="prop">campus:</span> <span class="string">"Politeknik Indonusa"</span>
+  <span class="prop">status:</span> <span class="string">"1st Semester Explorer"</span>
+  <span class="prop">stack:</span> [<span class="string">"HTML"</span>, <span class="string">"CSS"</span>, <span class="string">"JavaScript"</span>]
+<span class="tag">&lt;/profile&gt;</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About & Education Section -->
+    <section>
+        <h2 class="section-title">The Journey Begins</h2>
+        <p class="section-subtitle">A glimpse into who I am and where I study</p>
+        
+        <div class="about-container">
+            <div class="about-text">
+                <p>Hello! I am currently diving deep into the world of technology as a first-semester Software Engineering student at <strong>Politeknik Indonusa Surakarta</strong>.</p>
+                <p>My core fascination lies in turning raw code into visually engaging, high-performance web applications. I love experimenting with HTML, CSS, and modern JavaScript to design interfaces that feel alive, intuitive, and future-ready.</p>
+            </div>
+            <div class="edu-badge">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h4>Politeknik Indonusa Surakarta</h4>
+                <span>Software Engineering • Semester 1</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Technical Expertise</h2>
+        <p class="section-subtitle">Tools and languages I use to craft digital experiences</p>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+                <h3>HTML5 Architecture</h3>
+                <p>Writing clean, semantic, and accessible markup structured for future scalability and SEO optimization.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
+                <h3>Advanced CSS & Styling</h3>
+                <p>Crafting futuristic designs using custom properties, Flexbox, Grid, glassmorphism, and responsive media layouts.</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
+                <h3>JavaScript Interactions</h3>
+                <p>Adding dynamic behavior, smooth animations, and interactive elements to make static web pages feel responsive and alive.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Some of the web applications and sites I have built</p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag-pill">HTML5</span>
+                        <span class="tag-pill">CSS3</span>
+                        <span class="tag-pill">JavaScript</span>
+                    </div>
+                    <h3>CyberPortfolio UI</h3>
+                    <p>An experimental, high-tech portfolio template featuring glowing neon gradients, glass card layouts, and responsive components.</p>
+                    <a href="#projects" class="project-link">Explore Code <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag-pill">JavaScript</span>
+                        <span class="tag-pill">DOM</span>
+                        <span class="tag-pill">CSS Grid</span>
+                    </div>
+                    <h3>Interactive Task Matrix</h3>
+                    <p>A sleek productivity tracker built with vanilla JavaScript, enabling real-time task management with persistent local storage.</p>
+                    <a href="#projects" class="project-link">Explore Code <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-subtitle">Have a project in mind or want to chat about tech? Reach out!</p>
+        
+        <div style="text-align: left; max-width: 600px;">
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">I'm always open to discussing new ideas, collaborating on student projects, or learning more about software engineering.</p>
+            <a href="mailto:shabrina@example.com" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Send an Email</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <span>Shabrina Namsikul Haq</span>. Crafted with code & passion.</p>
+    </footer>
+
+</body>
+</html>
